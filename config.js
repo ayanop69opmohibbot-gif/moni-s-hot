@@ -7,7 +7,7 @@
 //  KABHI "service_role" key yahan mat daalna.
 //  Dono khali chhodo to site purane tareeke se chalegi (node server.js ya browser mode).
 window.SITE_CONFIG = {
-    supabaseUrl: "",        // e.g. "https://abcdxyz.supabase.co"
-    supabaseAnonKey: "",    // e.g. "eyJhbGciOi..."
+       supabaseUrl: "https://kaaadfzxsjnagfykyzeg.supabase.co",
+    supabaseAnonKey: "sb_publishable_-a4EefY94faStVrLE_AqOQ_dFv3NIXv",
     imageBucket: "product-images"
 };
