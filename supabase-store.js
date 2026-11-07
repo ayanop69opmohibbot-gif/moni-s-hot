@@ -47,7 +47,9 @@
     // ------------------------------------------------------------ http
     function raw(method, path, body, bearer, extra) {
         var h = { apikey: KEY, "Content-Type": "application/json" };
-        h.Authorization = "Bearer " + (bearer || KEY);
+        // new-style keys (sb_publishable_...) are not JWTs: send them only as `apikey`, never as the Bearer token
+        if (bearer) h.Authorization = "Bearer " + bearer;
+        else if (!/^sb_/.test(KEY)) h.Authorization = "Bearer " + KEY;
         if (extra) Object.keys(extra).forEach(function (k) { h[k] = extra[k]; });
         return fetch(URL_ + path, { method: method, headers: h, body: body === undefined ? undefined : (typeof body === "string" ? body : JSON.stringify(body)) })
             .then(function (r) {
