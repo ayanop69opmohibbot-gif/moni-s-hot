@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking | Moni's Hot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="order-success.css?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+    <script src="seed-data.js?v=5"></script>
+    <script src="store.js?v=5"></script>
+    <script src="config.js?v=5"></script>
+    <script src="supabase-store.js?v=5"></script>
+</head>
+<body>
+<header>
+
+        <!-- NAVBAR -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/Professional_Logo_with_Minimalistic_Graphic_Accents-removebg-preview.png" alt="Logo">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fa-solid fa-house"></i>
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="fa-jelly-fill fa-regular fa-user"></i>
+                                About Us
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="terms.html">
+                                <i class="fa-solid fa-file-contract"></i>
+                                Terms & Conditions
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="privacy.html">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                Privacy Policy
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="fa-solid fa-phone"></i>
+                                Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="add to card.html" class="btn btn-danger ms-2">
+                 <i class="fa-solid fa-cart-shopping"></i> Cart
+                </a>
+
+                <button id="themeBtn" class="btn btn-dark">
+                  🌙
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <div class="border-bottom">
+            <div class="container py-2">
+                <div class="row g-2 align-items-center">
+                    
+                    <div class="col-12 text-center text-lg-end">
+                        <div id="loginbtn">
+                        <button onclick="location.href='login.html'" class="btn btn-light me-2">
+                            Login
+                        </button>
+
+                        <button  onclick="location.href='singin.html'" class="btn btn-primary">
+                            Sign-up
+                        </button>
+
+                        </div>
+                    
+                        <button id="logoutbtn" onclick="Logout()" class="btn btn-danger" style="display:none;">
+                             Logout
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVBAR END -->
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-5">
+                            <div class="success-icon">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                            </div>
+
+                            <h1 class="fw-bold mt-3">
+
+                                Order Confirmed 🎉
+
+                            </h1>
+
+                            <p class="text-muted">
+
+                                Your delicious BBQ is being prepared.
+
+                            </p>
+
+                        </div>
+
+                        <div class="row">
+
+                            <!-- LEFT -->
+
+                            <div class="col-lg-6">
+                                <div class="tracking-card">
+                                    <h4 class="fw-bold mb-4">
+                                        Delivery Status
+                                    </h4>
+
+                                    <div class="delivery-time">
+                                        <i class="fa-solid fa-clock text-danger"></i>
+                                        <span id="timer">
+                                            30:00
+                                        </span>
+                                    </div>
+
+
+<div class="card shadow border-0 rounded-4 mb-4">
+    <div class="card-body">
+        <h5 class="fw-bold mb-3">
+            Delivery Progress
+        </h5>
+        <div class="progress" style="height:25px;">
+
+            <div
+            id="progressBar"
+            class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+            style="width:0%">
+            0%
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                                    <div class="timeline mt-5">
+
+                                        <div class="step active">
+
+                                            <div class="circle"></div>
+
+                                            <p>Order Confirmed</p>
+
+                                        </div>
+
+                                        <div class="step">
+
+                                            <div class="circle"></div>
+
+                                            <p>Preparing Food</p>
+
+                                        </div>
+
+                                        <div class="step">
+
+                                            <div class="circle"></div>
+
+                                            <p>Cooking</p>
+
+                                        </div>
+
+                                        <div class="step">
+
+                                            <div class="circle"></div>
+
+                                            <p>Out For Delivery</p>
+
+                                        </div>
+
+                                        <div class="step">
+
+                                            <div class="circle"></div>
+
+                                            <p>Delivered</p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- RIGHT -->
+
+                            <div class="col-lg-6">
+
+                                <div class="order-card">
+
+                                    <h4 class="fw-bold mb-4">
+
+                                        Order Details
+
+                                    </h4>
+
+                                    <div class="info">
+
+                                        <p>
+
+                                            <strong>Order ID</strong>
+
+                                        </p>
+
+                                        <h5 id="orderId">
+
+                                            MH00001
+
+                                        </h5>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="info">
+
+                                        <p>
+
+                                            <strong>Customer</strong>
+
+                                        </p>
+
+                                        <h6 id="customer">
+
+                                            -
+
+                                        </h6>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="info">
+
+                                        <p>
+
+                                            <strong>Payment</strong>
+
+                                        </p>
+
+                                        <h6 id="payment">
+
+                                            -
+
+                                        </h6>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="info">
+
+                                        <p>
+                                            <strong>Total</strong>
+                                        </p>
+
+                                        <h4 class="text-danger" id="total">
+                                            Rs.0
+                                        </h4>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <h5 class="fw-bold mb-3">
+                                        Ordered Items
+                                    </h5>
+
+                                    <div id="orderedItems">
+
+                                    </div>
+
+                                    <div class="d-grid mt-4">
+
+                                         <button id="cancelOrderBtn" class="btn-cancel-order">
+                                        <i class="fa-solid fa-xmark me-2"></i>
+                                             Cancel Order
+                                        </button>
+
+                                        <a href="index.html" class="btn btn-danger btn-lg">
+                                            Continue Shopping
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="jquery.js?v=3"></script>
+    <script src="order-status.js?v=3"></script>
+<script src="order-success.js?v=3"></script>
+<footer class="mh-foot"><div class="mh-wrap"><div class="mh-foot-grid">
+<div><a class="mh-brand" href="index.html"><span class="mh-flame"><i class="fa-solid fa-fire-flame-curved"></i></span><span><b>Moni's Hot</b><small>Charcoal BBQ &middot; Karachi</small></span></a><p>Charcoal-grilled BBQ, made fresh with authentic spices and delivered across Karachi.</p><div class="mh-social"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a></div></div>
+<div><h6>Explore</h6><a href="index.html">Home</a><a href="add to card.html">My Cart</a><a href="login.html">Login</a><a href="singin.html">Sign up</a></div>
+<div><h6>Company</h6><a href="about.html">About Us</a><a href="terms.html">Terms &amp; Conditions</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact Us</a></div>
+<div><h6>Ordering</h6><p><i class="fa-solid fa-truck-fast"></i>Free delivery in Karachi</p><p><i class="fa-solid fa-wallet"></i>Cash on delivery, card, JazzCash and EasyPaisa</p></div>
+</div></div><div class="mh-foot-bar"><div class="mh-wrap">&copy; <script>document.write(new Date().getFullYear())</script> Moni's Hot. All rights reserved.</div></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="nav.js?v=3"></script>
+</body>
+</html>

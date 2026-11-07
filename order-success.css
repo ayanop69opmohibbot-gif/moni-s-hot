@@ -1,0 +1,430 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f8f9fa;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Card */
+
+.card{
+    border-radius:25px;
+}
+
+/* Success Icon */
+
+.success-icon{
+
+    width:120px;
+    height:120px;
+
+    background:#198754;
+
+    color:#fff;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin:auto;
+
+    font-size:55px;
+
+    animation:pop .7s ease;
+
+    box-shadow:0 15px 40px rgba(25,135,84,.3);
+
+}
+
+@keyframes pop{
+
+0%{
+transform:scale(.4);
+opacity:0;
+}
+
+60%{
+transform:scale(1.15);
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+/* Left Card */
+
+.tracking-card{
+
+background:#fff;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* Right Card */
+
+.order-card{
+
+background:#fff;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* Timer */
+
+.delivery-time{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:15px;
+
+font-size:34px;
+
+font-weight:bold;
+
+color:#dc3545;
+
+}
+
+/* Timeline */
+
+.timeline{
+
+position:relative;
+
+padding-left:20px;
+
+}
+
+.timeline::before{
+
+content:"";
+
+position:absolute;
+
+left:12px;
+
+top:5px;
+
+height:88%;
+
+width:4px;
+
+background:#dee2e6;
+
+border-radius:10px;
+
+}
+
+/* Step */
+
+.step{
+
+display:flex;
+
+align-items:center;
+
+margin:28px 0;
+
+position:relative;
+
+}
+
+/* Circle */
+
+.circle{
+
+width:24px;
+
+height:24px;
+
+border-radius:50%;
+
+background:#adb5bd;
+
+border:4px solid #fff;
+
+box-shadow:0 0 0 3px #adb5bd;
+
+transition:.4s;
+
+z-index:5;
+
+}
+
+/* Text */
+
+.step p{
+
+margin-left:20px;
+
+margin-bottom:0;
+
+font-size:18px;
+
+font-weight:600;
+
+color:#6c757d;
+
+}
+
+/* Active */
+
+.step.active .circle{
+
+background:#198754;
+
+box-shadow:0 0 0 4px #198754;
+
+animation:pulse 1.2s infinite;
+
+}
+
+.step.active p{
+
+color:#198754;
+
+}
+
+/* Pulse */
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.15);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+/* Ordered Items */
+
+#orderedItems{
+
+max-height:280px;
+
+overflow-y:auto;
+
+padding-right:5px;
+
+}
+
+#orderedItems::-webkit-scrollbar{
+
+width:6px;
+
+}
+
+#orderedItems::-webkit-scrollbar-thumb{
+
+background:#dc3545;
+
+border-radius:20px;
+
+}
+
+/* Item */
+
+.item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:12px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+.item img{
+
+width:70px;
+
+height:70px;
+
+object-fit:cover;
+
+border-radius:12px;
+
+margin-right:15px;
+
+}
+
+/* Info */
+
+.info{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+/* Button */
+
+.btn-danger{
+
+border-radius:50px;
+
+padding:12px;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+.btn-danger:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 10px 20px rgba(220,53,69,.3);
+
+}
+
+/* Mobile */
+
+@media(max-width:991px){
+
+.tracking-card{
+
+margin-bottom:30px;
+
+}
+
+.delivery-time{
+
+font-size:28px;
+
+}
+
+.success-icon{
+
+width:100px;
+height:100px;
+font-size:45px;
+
+}
+
+.step p{
+
+font-size:16px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.card-body{
+
+padding:20px;
+
+}
+
+h1{
+
+font-size:30px;
+
+}
+
+.delivery-time{
+
+font-size:24px;
+
+}
+
+.success-icon{
+
+width:85px;
+height:85px;
+font-size:38px;
+
+}
+
+.item{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.info{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:5px;
+
+}
+
+}
+
+
+
+.btn-cancel-order{
+    width:100%;
+    height:55px;
+    border:1.5px solid #dc3545;
+    background:#fff;
+    color:#dc3545;
+    border-radius:14px;
+    font-size:18px;
+    font-weight:600;
+    transition:.3s;
+    margin-top:25px;
+    margin-bottom:15px;
+}
+
+.btn-cancel-order:hover{
+    background:#dc3545;
+    color:#fff;
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(220,53,69,.25);
+}
+
+.btn-cancel-order i{
+    font-size:18px;
+}

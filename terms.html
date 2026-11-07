@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions | Moni's Hot</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="icon" type="images/marshall-islands.png" href="images/marshall-islands.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+    <script src="seed-data.js?v=5"></script>
+    <script src="store.js?v=5"></script>
+    <script src="config.js?v=5"></script>
+    <script src="supabase-store.js?v=5"></script>
+</head>
+<body class="bg-light">
+<header>
+
+        <!-- NAVBAR -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/Professional_Logo_with_Minimalistic_Graphic_Accents-removebg-preview.png" alt="Logo">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fa-solid fa-house"></i>
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="fa-jelly-fill fa-regular fa-user"></i>
+                                About Us
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="terms.html">
+                                <i class="fa-solid fa-file-contract"></i>
+                                Terms & Conditions
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="privacy.html">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                Privacy Policy
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="fa-solid fa-phone"></i>
+                                Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="add to card.html" class="btn btn-danger ms-2">
+                 <i class="fa-solid fa-cart-shopping"></i> Cart
+                </a>
+
+                <button id="themeBtn" class="btn btn-dark">
+                  🌙
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <div class="border-bottom">
+            <div class="container py-2">
+                <div class="row g-2 align-items-center">
+                    
+                    <div class="col-12 text-center text-lg-end">
+                        <div id="loginbtn">
+                        <button onclick="location.href='login.html'" class="btn btn-light me-2">
+                            Login
+                        </button>
+
+                        <button  onclick="location.href='singin.html'" class="btn btn-primary">
+                            Sign-up
+                        </button>
+
+                        </div>
+                    
+                        <button id="logoutbtn" onclick="Logout()" class="btn btn-danger" style="display:none;">
+                             Logout
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<section class="mh-banner">
+  <small>Legal</small>
+  <h1>Terms &amp; Conditions</h1>
+  <p>The rules for using our website and ordering from Moni's Hot.</p>
+</section>
+
+<main class="mh-page">
+<div class="mh-prose">
+  <span class="mh-updated">Last updated: November 2026</span>
+  <p>Welcome to Moni's Hot. By using this website and placing an order, you agree to the terms below. Please read them carefully.</p>
+
+  <h2>1. Orders</h2>
+  <ul>
+    <li>An order is confirmed once you complete checkout and receive an order confirmation.</li>
+    <li>Please provide a correct name, phone number and delivery address. We are not responsible for delays caused by wrong or incomplete details.</li>
+    <li>We may decline or cancel an order if an item is unavailable or we cannot reach you to confirm it.</li>
+  </ul>
+
+  <h2>2. Prices and Payment</h2>
+  <ul>
+    <li>All prices are shown in Pakistani Rupees (PKR) and may change without notice.</li>
+    <li>We accept cash on delivery, card, JazzCash and EasyPaisa.</li>
+    <li>The price shown at checkout is the price you pay for that order.</li>
+  </ul>
+
+  <h2>3. Delivery</h2>
+  <ul>
+    <li>We offer free delivery within Karachi.</li>
+    <li>Delivery times are estimates and can vary with traffic, weather and order volume.</li>
+    <li>Please be available at the delivery address. If we cannot reach you, the order may be cancelled.</li>
+  </ul>
+
+  <h2>4. Cancellations and Refunds</h2>
+  <ul>
+    <li>You can cancel an order before it has been prepared by contacting us immediately.</li>
+    <li>Because food is made fresh, orders cannot be cancelled once preparation has started.</li>
+    <li>If your order is wrong, damaged or not as described, contact us on the same day and we will make it right.</li>
+  </ul>
+
+  <h2>5. Your Account</h2>
+  <p>You are responsible for keeping your login details private and for activity under your account. Please give accurate information when you sign up.</p>
+
+  <h2>6. Food Allergies</h2>
+  <p>Our dishes contain spices and may be prepared in a kitchen that handles other ingredients. If you have an allergy, tell us before ordering.</p>
+
+  <h2>7. Acceptable Use</h2>
+  <p>Do not misuse the website, attempt to access other users' data, or place false or abusive orders. We may suspend accounts that do.</p>
+
+  <h2>8. Limitation of Liability</h2>
+  <p>We do our best to keep the website accurate and available, but we cannot guarantee it will always be error-free or uninterrupted. To the extent allowed by law, our liability is limited to the value of the affected order.</p>
+
+  <h2>9. Changes to These Terms</h2>
+  <p>We may update these terms from time to time. The latest version will always be on this page.</p>
+
+  <h2>10. Contact</h2>
+  <p>Questions about these terms? Reach us through our <a href="contact.html">Contact page</a>.</p>
+</div>
+</main>
+
+<script src="nav.js?v=3"></script>
+<footer class="mh-foot"><div class="mh-wrap"><div class="mh-foot-grid">
+<div><a class="mh-brand" href="index.html"><span class="mh-flame"><i class="fa-solid fa-fire-flame-curved"></i></span><span><b>Moni's Hot</b><small>Charcoal BBQ &middot; Karachi</small></span></a><p>Charcoal-grilled BBQ, made fresh with authentic spices and delivered across Karachi.</p><div class="mh-social"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a></div></div>
+<div><h6>Explore</h6><a href="index.html">Home</a><a href="add to card.html">My Cart</a><a href="login.html">Login</a><a href="singin.html">Sign up</a></div>
+<div><h6>Company</h6><a href="about.html">About Us</a><a href="terms.html">Terms &amp; Conditions</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact Us</a></div>
+<div><h6>Ordering</h6><p><i class="fa-solid fa-truck-fast"></i>Free delivery in Karachi</p><p><i class="fa-solid fa-wallet"></i>Cash on delivery, card, JazzCash and EasyPaisa</p></div>
+</div></div><div class="mh-foot-bar"><div class="mh-wrap">&copy; <script>document.write(new Date().getFullYear())</script> Moni's Hot. All rights reserved.</div></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

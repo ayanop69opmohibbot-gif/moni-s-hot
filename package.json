@@ -1,0 +1,8 @@
+{
+  "name": "monis-hot",
+  "version": "1.0.0",
+  "description": "Moni's Hot website with admin panel (no dependencies)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=16" }
+}

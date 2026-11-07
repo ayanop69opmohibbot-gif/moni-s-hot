@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="icon" href="images/marshall-islands.png">
+    <script src="jquery.js?v=3"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+    <script src="seed-data.js?v=5"></script>
+    <script src="store.js?v=5"></script>
+    <script src="config.js?v=5"></script>
+    <script src="supabase-store.js?v=5"></script>
+</head>
+
+<body class="bg-light">
+<header>
+
+        <!-- NAVBAR -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/Professional_Logo_with_Minimalistic_Graphic_Accents-removebg-preview.png" alt="Logo">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fa-solid fa-house"></i>
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="fa-jelly-fill fa-regular fa-user"></i>
+                                About Us
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="terms.html">
+                                <i class="fa-solid fa-file-contract"></i>
+                                Terms & Conditions
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="privacy.html">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                Privacy Policy
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="fa-solid fa-phone"></i>
+                                Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="add to card.html" class="btn btn-danger ms-2">
+                 <i class="fa-solid fa-cart-shopping"></i> Cart
+                </a>
+
+                <button id="themeBtn" class="btn btn-dark">
+                  🌙
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <div class="border-bottom">
+            <div class="container py-2">
+                <div class="row g-2 align-items-center">
+                    
+                    <div class="col-12 text-center text-lg-end">
+                        <div id="loginbtn">
+                        <button onclick="location.href='login.html'" class="btn btn-light me-2">
+                            Login
+                        </button>
+
+                        <button  onclick="location.href='singin.html'" class="btn btn-primary">
+                            Sign-up
+                        </button>
+
+                        </div>
+                    
+                        <button id="logoutbtn" onclick="Logout()" class="btn btn-danger" style="display:none;">
+                             Logout
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVBAR END -->
+
+    <!-- TEXT AREA -->
+
+
+    <div class="container">
+        <div class="row py-5 justify-content-center align-items-center">
+
+            <div class="col-md-5">
+
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-5">
+
+                        <div class="text-center mb-4">
+                            <i class="fa-solid fa-fire-flame-curved text-danger fa-3x"></i>
+                            <h2 class="fw-bold mt-3">Create Account</h2>
+                            <p class="text-muted">Join Moni's Hot Today</p>
+                        </div>
+
+                        <!-- TEXT AREA END -->
+
+
+                        <form id="register">
+
+                            <div class="mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Enter Full Name">
+                                <span id="namemassage"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="Enter Email" >
+                                <span id="emassage"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Password</label>
+                                <input type="password" id="password" class="form-control" placeholder="Create Password">
+                                <span id="pmassage"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="fa-solid fa-user-plus me-2"></i>
+                                Create Account
+                            </button>
+
+                        </form>
+
+                        <p class="text-center mt-4 mb-0">
+                            Already have an account?
+                            <a href="login.html" class="text-danger text-decoration-none fw-bold">Login</a>
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="script.js?v=3"></script>
+<script src="nav.js?v=3"></script>
+<footer class="mh-foot"><div class="mh-wrap"><div class="mh-foot-grid">
+<div><a class="mh-brand" href="index.html"><span class="mh-flame"><i class="fa-solid fa-fire-flame-curved"></i></span><span><b>Moni's Hot</b><small>Charcoal BBQ &middot; Karachi</small></span></a><p>Charcoal-grilled BBQ, made fresh with authentic spices and delivered across Karachi.</p><div class="mh-social"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a></div></div>
+<div><h6>Explore</h6><a href="index.html">Home</a><a href="add to card.html">My Cart</a><a href="login.html">Login</a><a href="singin.html">Sign up</a></div>
+<div><h6>Company</h6><a href="about.html">About Us</a><a href="terms.html">Terms &amp; Conditions</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact Us</a></div>
+<div><h6>Ordering</h6><p><i class="fa-solid fa-truck-fast"></i>Free delivery in Karachi</p><p><i class="fa-solid fa-wallet"></i>Cash on delivery, card, JazzCash and EasyPaisa</p></div>
+</div></div><div class="mh-foot-bar"><div class="mh-wrap">&copy; <script>document.write(new Date().getFullYear())</script> Moni's Hot. All rights reserved.</div></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

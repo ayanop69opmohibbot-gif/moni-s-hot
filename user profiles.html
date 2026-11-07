@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile | Moni's Hot</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<link rel="stylesheet" href="style.css?v=3">
+
+    <script src="seed-data.js?v=5"></script>
+    <script src="store.js?v=5"></script>
+    <script src="config.js?v=5"></script>
+    <script src="supabase-store.js?v=5"></script>
+</head>
+
+
+<body class="bg-light">
+
+
+<div class="container py-5">
+
+
+    <div class="text-center mb-5">
+
+        <i class="fa-solid fa-circle-user fa-5x text-danger"></i>
+
+        <h1 class="fw-bold mt-3">
+            My Profile
+        </h1>
+
+        <p class="text-muted">
+            Manage your account details
+        </p>
+
+    </div>
+
+
+
+    <div class="row justify-content-center">
+
+
+        <div class="col-md-6">
+
+
+            <div class="card shadow border-0 rounded-4">
+
+
+                <div class="card-body p-5">
+
+
+                    <h3 class="text-center mb-4">
+                        Account Information
+                    </h3>
+
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Full Name
+                        </label>
+
+                        <input 
+                        type="text" 
+                        id="profileName"
+                        class="form-control"
+                        >
+
+                    </div>
+
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Email Address
+                        </label>
+
+                        <input 
+                        type="email" 
+                        id="profileEmail"
+                        class="form-control"
+                        >
+
+                    </div>
+
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <input 
+                        type="password" 
+                        id="profilePassword"
+                        class="form-control"
+                        >
+
+                    </div>
+
+
+
+                    <button onclick="UpdateProfile()" 
+                    class="btn btn-danger w-100 rounded-pill">
+
+                        <i class="fa-solid fa-pen me-2"></i>
+
+                        Update Profile
+
+                    </button>
+
+
+
+                    <button onclick="Logout()"
+                    class="btn btn-outline-dark w-100 rounded-pill mt-3">
+
+                        <i class="fa-solid fa-right-from-bracket me-2"></i>
+
+                        Logout
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script src="jquery.js?v=3"></script>
+<script src="script.js?v=3"></script>
+<script src="nav.js?v=3"></script>
+
+
+<script>
+
+
+// Show Existing Data
+
+document.getElementById("profileName").value =
+localStorage.getItem("name");
+
+
+document.getElementById("profileEmail").value =
+localStorage.getItem("email");
+
+
+document.getElementById("profilePassword").value =
+localStorage.getItem("password");
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

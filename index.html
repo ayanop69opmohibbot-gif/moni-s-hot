@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moni's Hot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="icon" type="images/marshall-islands.png" href="images/marshall-islands.png">
+    <script src="jquery.js?v=3"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="seed-data.js?v=5"></script>
+    <script src="store.js?v=5"></script>
+    <script src="config.js?v=5"></script>
+    <script src="supabase-store.js?v=5"></script>
+</head>
+
+<body>
+<header>
+
+        <!-- NAVBAR -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/Professional_Logo_with_Minimalistic_Graphic_Accents-removebg-preview.png" alt="Logo">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">
+                                <i class="fa-solid fa-house"></i>
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="fa-jelly-fill fa-regular fa-user"></i>
+                                About Us
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="terms.html">
+                                <i class="fa-solid fa-file-contract"></i>
+                                Terms & Conditions
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="privacy.html">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                Privacy Policy
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="fa-solid fa-phone"></i>
+                                Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="add to card.html" class="btn btn-danger ms-2">
+                 <i class="fa-solid fa-cart-shopping"></i> Cart
+                </a>
+
+                <button id="themeBtn" class="btn btn-dark">
+                  🌙
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <div class="border-bottom">
+            <div class="container py-2">
+                <div class="row g-2 align-items-center">
+                    <div class="col-12 col-lg-6">
+                        <input type="search" id="search" class="form-control" placeholder="Search...">
+                    </div>
+                    <div class="col-12 col-lg-6 text-center text-lg-end">
+                        <div id="loginbtn">
+                        <button onclick="location.href='login.html'" class="btn btn-light me-2">
+                            Login
+                        </button>
+
+                        <button  onclick="location.href='singin.html'" class="btn btn-primary">
+                            Sign-up
+                        </button>
+
+                        </div>
+                    
+                        <button id="logoutbtn" onclick="Logout()" class="btn btn-danger" style="display:none;">
+                             Logout
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVBAR END -->
+
+    
+
+    
+
+    <div id="trackOrderBox" class="container mt-3" style="display:none;">
+
+    <div class="alert alert-warning d-flex justify-content-between align-items-center shadow">
+
+        <div>
+
+            <h5 class="mb-1">
+                🍗 Your Order is on the way!
+            </h5>
+
+            <small>
+                Tap below to track your delivery.
+            </small>
+
+        </div>
+
+        <a href="order-success.html" class="btn btn-danger rounded-pill px-4">
+         <i class="fa-solid fa-location-dot me-2"></i>
+                Track My Order
+        </a>
+
+    </div>
+
+</div>
+
+    <!-- HERO SECTION -->
+
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                class="active"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="images/1698133860-11.webp" class="d-block w-100" alt="">
+                <div class="carousel-caption">
+                    <h2>
+                        Experience the Rich Flavours of Authentic BBQ
+                    </h2>
+                    <p>
+                        Enjoy the perfect combination of smoky flavours and premium quality.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="carousel-item">
+                <img src="images/rUStBvKogEnbTcKs_rQ6SV5o6pEWRMj6K5ghI9opzonoREQ5jxrVWlm4fCye6xr1HdlMXPETksWDZzzLS8NMM7NMmNCL-VNesvdpGlmi9HUITu24A2Aq0p0zNdQ7EV3KLtosGdOBnJi6YI0EwtCynAqXZfKv78yD639t0uGTt1XR7fuqcBF0UeeFx10lUFfZ.jpeg"
+                    class="d-block w-100" alt="">
+                <div class="carousel-caption">
+                    <h2>
+                        Experience the Rich Flavours of Authentic BBQ
+                    </h2>
+                    <p>
+                        Enjoy the perfect combination of smoky flavours and premium quality.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="carousel-item">
+                <img src="images/bbq2.jpeg" class="d-block w-100" alt="">
+                <div class="carousel-caption">
+                    <h2>
+                        Experience the Rich Flavours of Authentic BBQ
+                    </h2>
+                    <p>
+                        Enjoy the perfect combination of smoky flavours and premium quality.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- HERO SECTION END -->
+
+
+    <!-- WALCOME SECTION -->
+
+    <section class="py-5 bg-light">
+        <div class="container text-center">
+
+            <h5 class="text-danger fw-bold">
+                Welcome to Moni's Hot
+            </h5>
+
+            <h2 class="fw-bold mb-3">
+                Taste the Best BBQ in Town
+            </h2>
+
+            <p class="text-muted w-75 mx-auto">
+                We serve delicious BBQ made with fresh ingredients,
+                authentic spices, and a unique smoky flavor.
+                Enjoy every bite with your family and friends.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- WALCOME SECTION END-->
+
+
+<!-- Category Section  -->
+
+<center>
+<h5 class="text-danger fw-bold mt-5">Fresh & Delicious</h5>
+<h2 class="fw-bold">Our BBQ Collections</h2>
+<p class="text-muted">
+Enjoy premium quality BBQ dishes prepared with authentic flavors.
+</p>
+</center>
+
+
+<div class="container mt-3">
+<div class="cat-slider">
+<button type="button" class="cat-arrow prev" id="catPrev" aria-label="Previous categories"><i class="fa-solid fa-chevron-left"></i></button>
+<div class="cat-track" id="CategoryListing">
+
+</div>
+<button type="button" class="cat-arrow next" id="catNext" aria-label="Next categories"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+</div>
+
+
+<!-- Category Section end -->
+
+
+
+    <!-- MENU SECTION -->
+
+    <section class="py-5">
+        <div class="container text-center">
+
+            <h5 class="text-danger fw-bold">
+                Our Menu
+            </h5>
+
+            <h2 class="fw-bold">
+                Popular BBQ Dishes
+            </h2>
+
+            <p class="text-muted">
+                Choose your favorite meal from our delicious BBQ menu.
+            </p>
+
+        </div>
+    </section>
+
+
+    <div class="container py-5">
+        <div class="row" id="cardContainer">
+
+        </div>
+    </div>
+
+
+    <!-- MENU SECTION END -->
+
+
+    
+
+   
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="order-status.js?v=3"></script>
+<script src="script.js?v=3"></script>
+<script src="nav.js?v=3"></script>
+<footer class="mh-foot"><div class="mh-wrap"><div class="mh-foot-grid">
+<div><a class="mh-brand" href="index.html"><span class="mh-flame"><i class="fa-solid fa-fire-flame-curved"></i></span><span><b>Moni's Hot</b><small>Charcoal BBQ &middot; Karachi</small></span></a><p>Charcoal-grilled BBQ, made fresh with authentic spices and delivered across Karachi.</p><div class="mh-social"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a></div></div>
+<div><h6>Explore</h6><a href="index.html">Home</a><a href="add to card.html">My Cart</a><a href="login.html">Login</a><a href="singin.html">Sign up</a></div>
+<div><h6>Company</h6><a href="about.html">About Us</a><a href="terms.html">Terms &amp; Conditions</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact Us</a></div>
+<div><h6>Ordering</h6><p><i class="fa-solid fa-truck-fast"></i>Free delivery in Karachi</p><p><i class="fa-solid fa-wallet"></i>Cash on delivery, card, JazzCash and EasyPaisa</p></div>
+</div></div><div class="mh-foot-bar"><div class="mh-wrap">&copy; <script>document.write(new Date().getFullYear())</script> Moni's Hot. All rights reserved.</div></div></footer>
+</body>
+</html>

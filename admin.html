@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Moni's Hot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="icon" href="images/marshall-islands.png">
+    <script src="seed-data.js?v=5"></script>
+    <script src="store.js?v=5"></script>
+    <script src="config.js?v=5"></script>
+    <script src="supabase-store.js?v=5"></script>
+    <script src="order-status.js?v=5"></script>
+    <style>
+        :root{--ink:#1c1411;--ember:#d9381e;--ember-d:#b82b13;--gold:#f4a62a;--bg:#f5f1ec;--line:#e6dacd;--muted:#7a6c62}
+        body{background:var(--bg);color:#2a201b;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+        .topbar{background:var(--ink);border-bottom:3px solid var(--ember)}
+        .topbar .brand{color:#fff;font-weight:800;text-decoration:none;font-size:1.15rem}
+        .topbar .brand i{color:var(--gold);margin-right:8px}
+        .mode-pill{font-size:.75rem;padding:5px 12px;border-radius:999px;font-weight:600}
+        .mode-server{background:#d6f5df;color:#14602b}.mode-browser{background:#fff0cc;color:#7a5200}
+        .layout{display:grid;grid-template-columns:230px 1fr;gap:24px;max-width:1500px;margin:0 auto;padding:24px}
+        .side{position:sticky;top:20px;align-self:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px}
+        .side button{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;padding:11px 14px;border-radius:10px;color:#2a201b;font-weight:600;text-align:left}
+        .side button i{width:20px;text-align:center;color:var(--muted)}
+        .side button:hover{background:#faf5ef}
+        .side button.active{background:var(--ember);color:#fff}.side button.active i{color:#fff}
+        .side .count{margin-left:auto;font-size:.72rem;background:var(--gold);color:#3a2800;border-radius:999px;padding:2px 8px}
+        .side button.active .count{background:#fff;color:var(--ember)}
+        .panel{display:none}.panel.active{display:block}
+        .panel-head{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:18px}
+        .panel-head h2{font-size:1.5rem;font-weight:800;margin:0}
+        .box{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 2px 10px rgba(40,20,10,.04)}
+        .stat{padding:18px 20px;height:100%}
+        .stat small{color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;font-size:.72rem}
+        .stat h3{font-weight:800;margin:6px 0 0;font-size:1.7rem}
+        .stat i{float:right;font-size:1.3rem;color:var(--gold)}
+        .btn-ember{background:var(--ember);border-color:var(--ember);color:#fff}.btn-ember:hover{background:var(--ember-d);border-color:var(--ember-d);color:#fff}
+        .table>:not(caption)>*>*{padding:.8rem}
+        .thumb{width:56px;height:56px;border-radius:10px;object-fit:cover;background:#eee}
+        .table thead th{background:var(--ink);color:#fff;font-weight:600;font-size:.85rem;white-space:nowrap}
+        .form-label{font-weight:600;font-size:.9rem}
+        .img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:8px;max-height:190px;overflow:auto;padding:4px}
+        .img-grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;border:3px solid transparent;cursor:pointer}
+        .img-grid img.sel{border-color:var(--ember)}
+        .preview{width:100%;max-width:220px;aspect-ratio:4/3;object-fit:cover;border-radius:14px;border:1px solid var(--line);background:#eee}
+        .toasts{position:fixed;top:78px;right:18px;z-index:2000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+        .toasts .alert{pointer-events:auto;box-shadow:0 8px 24px rgba(0,0,0,.18);margin:0;min-width:240px}
+        .empty{padding:42px 12px;text-align:center;color:var(--muted)}
+        .msg-unread{background:#fff8e6}
+        @media(max-width:991px){.layout{grid-template-columns:1fr;padding:14px}.side{position:static;display:flex;overflow-x:auto;gap:4px}.side button{white-space:nowrap;width:auto}}
+            /* the modal forms wrap header/body/footer, so make them behave like the modal-content flex column */
+        .modal-dialog-scrollable .modal-content{max-height:calc(100vh - 2rem)}
+        .modal-dialog-scrollable .modal-content > form{display:flex;flex-direction:column;min-height:0;max-height:calc(100vh - 2rem)}
+        .modal-dialog-scrollable .modal-content > form .modal-body{overflow-y:auto;min-height:0}
+        .modal-dialog-scrollable .modal-content > form .modal-footer{background:#fff;border-top:1px solid var(--line)}
+        .modal-body::-webkit-scrollbar{width:10px}.modal-body::-webkit-scrollbar-thumb{background:#c9bcae;border-radius:8px}
+    </style>
+</head>
+<body>
+
+<script>
+if (sessionStorage.getItem("adminLoggedIn") != "true") location.replace("login.html");
+</script>
+
+<div class="topbar">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 px-3 py-3" style="max-width:1500px;margin:0 auto">
+        <a class="brand" href="admin.html"><i class="fa-solid fa-fire-flame-curved"></i>Moni's Hot <span class="fw-normal opacity-75">Admin</span></a>
+        <div class="d-flex align-items-center gap-2">
+            <span id="modePill" class="mode-pill"></span>
+            <a href="index.html" target="_blank" class="btn btn-outline-light btn-sm"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i>View Website</a>
+            <button class="btn btn-outline-light btn-sm" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket me-1"></i>Logout</button>
+        </div>
+    </div>
+</div>
+
+<div id="modeNote" class="container-fluid px-4 pt-3" style="max-width:1500px"></div>
+
+<div class="layout">
+    <nav class="side" id="sideNav">
+        <button data-tab="dashboard" class="active"><i class="fa-solid fa-gauge"></i>Dashboard</button>
+        <button data-tab="products"><i class="fa-solid fa-utensils"></i>Products</button>
+        <button data-tab="categories"><i class="fa-solid fa-layer-group"></i>Categories</button>
+        <button data-tab="orders"><i class="fa-solid fa-bag-shopping"></i>Orders <span id="navOrders" class="count" style="display:none"></span></button>
+        <button data-tab="customers"><i class="fa-solid fa-users"></i>Customers</button>
+        <button data-tab="messages"><i class="fa-solid fa-envelope"></i>Messages <span id="navMsgs" class="count" style="display:none"></span></button>
+        <button data-tab="settings"><i class="fa-solid fa-gear"></i>Settings</button>
+    </nav>
+
+    <main>
+        <!-- ================= DASHBOARD ================= -->
+        <section class="panel active" id="tab-dashboard">
+            <div class="panel-head"><h2>Dashboard</h2>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-ember btn-sm" data-go="products" data-new="1"><i class="fa-solid fa-plus me-1"></i>Add Product</button>
+                    <button class="btn btn-outline-dark btn-sm" data-go="orders">View Orders</button>
+                </div>
+            </div>
+            <div class="row g-3 mb-4" id="statRow"></div>
+            <div class="box">
+                <div class="p-3 border-bottom fw-bold">Latest Orders</div>
+                <div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr></thead><tbody id="recentOrders"></tbody></table></div>
+            </div>
+        </section>
+
+        <!-- ================= PRODUCTS ================= -->
+        <section class="panel" id="tab-products">
+            <div class="panel-head"><h2>Products</h2>
+                <button class="btn btn-ember" id="addProductBtn"><i class="fa-solid fa-plus me-1"></i>Add Product</button>
+            </div>
+            <div class="row g-2 mb-3">
+                <div class="col-md-8"><input id="prodSearch" class="form-control" placeholder="Search products..."></div>
+                <div class="col-md-4"><select id="prodCatFilter" class="form-select"><option value="">All categories</option></select></div>
+            </div>
+            <div class="box"><div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead><tr><th>Image</th><th>Product</th><th>Category</th><th>Price</th><th>Best Seller</th><th>Visible</th><th>Actions</th></tr></thead>
+                    <tbody id="prodTable"></tbody>
+                </table></div></div>
+        </section>
+
+        <!-- ================= CATEGORIES ================= -->
+        <section class="panel" id="tab-categories">
+            <div class="panel-head"><h2>Categories</h2>
+                <button class="btn btn-ember" id="addCategoryBtn"><i class="fa-solid fa-plus me-1"></i>Add Category</button>
+            </div>
+            <div class="row g-3" id="catGrid"></div>
+        </section>
+
+        <!-- ================= ORDERS ================= -->
+        <section class="panel" id="tab-orders">
+            <div class="panel-head"><h2>Orders</h2>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-dark btn-sm" id="exportOrders"><i class="fa-solid fa-file-csv me-1"></i>Export CSV</button>
+                    <button class="btn btn-outline-danger btn-sm" id="clearOrders">Clear All</button>
+                </div>
+            </div>
+            <div class="row g-2 mb-3">
+                <div class="col-md-8"><input id="orderSearch" class="form-control" placeholder="Search by order ID, customer or phone..."></div>
+                <div class="col-md-4"><select id="orderStatusFilter" class="form-select"><option value="">All statuses</option>
+                    <option>Order Placed</option><option>Preparing</option><option>Out for Delivery</option><option>Delivered</option><option>Cancelled</option></select></div>
+            </div>
+            <div class="box"><div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead><tr><th>Order ID</th><th>Customer</th><th>Phone</th><th>City</th><th>Payment</th><th>Total</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+                    <tbody id="orderTable"></tbody>
+                </table></div></div>
+        </section>
+
+        <!-- ================= CUSTOMERS ================= -->
+        <section class="panel" id="tab-customers">
+            <div class="panel-head"><h2>Customers</h2></div>
+            <h5 class="fw-bold mb-2">Registered Users</h5>
+            <div class="box mb-4"><div class="table-responsive">
+                <table class="table align-middle mb-0"><thead><tr><th>Name</th><th>Email</th><th>Joined</th><th>Last login</th><th>Actions</th></tr></thead><tbody id="userTable"></tbody></table></div></div>
+            <h5 class="fw-bold mb-2">People Who Ordered</h5>
+            <div class="box"><div class="table-responsive">
+                <table class="table align-middle mb-0"><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Orders</th><th>Total Spent</th><th>Last Order</th></tr></thead><tbody id="buyerTable"></tbody></table></div></div>
+        </section>
+
+        <!-- ================= MESSAGES ================= -->
+        <section class="panel" id="tab-messages">
+            <div class="panel-head"><h2>Messages</h2>
+                <button class="btn btn-outline-danger btn-sm" id="clearMsgs">Clear All</button></div>
+            <div class="box"><div class="table-responsive">
+                <table class="table align-middle mb-0"><thead><tr><th>From</th><th>Subject</th><th>Message</th><th>Date</th><th>Actions</th></tr></thead><tbody id="msgTable"></tbody></table></div></div>
+        </section>
+
+        <!-- ================= SETTINGS ================= -->
+        <section class="panel" id="tab-settings">
+            <div class="panel-head"><h2>Settings</h2></div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="box p-4">
+                        <h5 class="fw-bold mb-3">Admin Login</h5>
+                        <form id="settingsForm" novalidate>
+                            <div class="mb-3"><label class="form-label">Current password *</label><input type="password" id="setCurrent" class="form-control" autocomplete="current-password"></div>
+                            <div class="mb-3"><label class="form-label">Username *</label><input type="text" id="setUser" class="form-control" value="admin" autocomplete="username"></div>
+                            <div class="mb-3"><label class="form-label">New password <small class="text-muted">(leave empty to keep current)</small></label><input type="password" id="setNew" class="form-control" autocomplete="new-password"></div>
+                            <div class="mb-3"><label class="form-label">Confirm new password</label><input type="password" id="setConfirm" class="form-control" autocomplete="new-password"></div>
+                            <div id="setError" class="text-danger small mb-2"></div>
+                            <button class="btn btn-ember">Save Login</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="box p-4 mb-4">
+                        <h5 class="fw-bold mb-2">Backup</h5>
+                        <p class="text-muted small">Download everything (products, categories, orders, messages) as a JSON file.</p>
+                        <button class="btn btn-outline-dark" id="backupBtn"><i class="fa-solid fa-download me-1"></i>Download Backup</button>
+                    </div>
+                    <div class="box p-4">
+                        <h5 class="fw-bold mb-2">Reset Menu</h5>
+                        <p class="text-muted small">Bring back the original 5 products and 3 categories. Your products are replaced. Orders and messages are not touched.</p>
+                        <button class="btn btn-outline-danger" id="resetBtn">Reset Menu to Defaults</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<!-- ================= PRODUCT MODAL ================= -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable"><div class="modal-content">
+        <form id="productForm" novalidate>
+            <div class="modal-header"><h5 class="modal-title fw-bold" id="productModalTitle">Add Product</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <input type="hidden" id="pId"><input type="hidden" id="pImage">
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label" for="pTitle">Product name *</label>
+                        <input class="form-control" id="pTitle" maxlength="80" placeholder="e.g. Chicken Tikka">
+                        <div class="invalid-feedback" id="pTitleErr"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="pPrice">Price (Rs.) *</label>
+                        <input class="form-control" id="pPrice" type="number" min="1" step="1" placeholder="799">
+                        <div class="invalid-feedback" id="pPriceErr"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="pCategory">Category *</label>
+                        <select class="form-select" id="pCategory"></select>
+                        <input class="form-control mt-2 d-none" id="pNewCategory" maxlength="40" placeholder="New category name">
+                        <div class="invalid-feedback d-block" id="pCategoryErr"></div>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column justify-content-end">
+                        <div class="form-check form-switch mb-2"><input class="form-check-input" type="checkbox" id="pBest"><label class="form-check-label" for="pBest">Show "Best Seller" badge</label></div>
+                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="pAvail" checked><label class="form-check-label" for="pAvail">Visible on website</label></div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="pDesc">Description *</label>
+                        <textarea class="form-control" id="pDesc" rows="3" maxlength="400" placeholder="Tell customers what makes this dish special (min 10 characters)"></textarea>
+                        <div class="invalid-feedback" id="pDescErr"></div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Picture *</label>
+                        <div class="row g-3">
+                            <div class="col-md-4"><img id="pPreview" class="preview" alt="Preview"></div>
+                            <div class="col-md-8">
+                                <div class="img-grid mb-2" id="imgGrid"></div>
+                                <div class="input-group input-group-sm mb-2">
+                                    <input type="file" class="form-control" id="pFile" accept="image/jpeg,image/png,image/webp,image/gif">
+                                    <span class="input-group-text"><i class="fa-solid fa-upload me-1"></i>Upload</span>
+                                </div>
+                                <input class="form-control form-control-sm" id="pImageText" placeholder="...or type an image file name / link (e.g. my-dish.jpg or https://...)">
+                                <small class="text-muted" id="uploadHint"></small>
+                                <div class="text-danger small" id="pImageErr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-ember" id="saveProductBtn">Save Product</button></div>
+        </form>
+    </div></div>
+</div>
+
+<!-- ================= CATEGORY MODAL ================= -->
+<div class="modal fade" id="categoryModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+        <form id="categoryForm" novalidate>
+            <div class="modal-header"><h5 class="modal-title fw-bold" id="categoryModalTitle">Add Category</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <input type="hidden" id="cOld">
+                <div class="mb-3"><label class="form-label" for="cName">Category name *</label><input class="form-control" id="cName" maxlength="40" placeholder="e.g. Chicken"><div class="invalid-feedback" id="cNameErr"></div></div>
+                <label class="form-label">Cover picture</label>
+                <div class="input-group mb-1"><input type="file" class="form-control" id="cFile" accept="image/jpeg,image/png,image/webp,image/gif"><span class="input-group-text"><i class="fa-solid fa-upload me-1"></i>Upload</span></div><small class="text-danger d-block mb-2" id="cFileErr"></small>
+                <div class="img-grid" id="catImgGrid"></div>
+                <input type="hidden" id="cImage">
+                <small class="text-muted">If you leave this empty, the picture of the first product is used.</small>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-ember">Save Category</button></div>
+        </form>
+    </div></div>
+</div>
+
+<!-- ================= ORDER MODAL ================= -->
+<div class="modal fade" id="orderModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title fw-bold">Order Details</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body" id="orderDetails"></div>
+        <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+    </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="admin.js?v=5"></script>
+</body>
+</html>
